@@ -50,13 +50,6 @@ def view_data():
     df = pd.read_csv(CSV_FILE)
     return df.to_html(index=False)
 
-import os
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))  # Use Render's PORT environment variable
-    app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0 for external access
-
-
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
     if request.method == 'POST':
@@ -82,3 +75,7 @@ def add_food():
 
     # If GET request, show the form
     return render_template('add_food.html')
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))  # Use Render's PORT environment variable
+    app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0 for external access
