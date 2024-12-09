@@ -57,3 +57,28 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)  # Bind to 0.0.0.0 for external access
 
 
+@app.route('/add_food', methods=['GET', 'POST'])
+def add_food():
+    if request.method == 'POST':
+        # Get food details from the form
+        food = request.form['food']
+        portion = request.form['portion']
+        meal = request.form['meal']
+
+        # Use today's date
+        date = datetime.date.today().strftime("%Y-%m-%d")
+
+        # Load existing data or create a new DataFrame
+        file_exists = os.path.exists(CSV_FILE)
+        df = pd.read_csv(CSV_FILE) if file_exists else pd.DataFrame(columns=['Date', 'Foods', 'Portion', 'Meal'])
+
+        # Add the new entry
+        new_entry = pd.DataFrame([[date, food, portion, meal]], columns=['Date', 'Foods', 'Portion', 'Meal'])
+        df = pd.concat([df, new_entry], ignore_index=True)
+
+        # Save back to CSV
+        df.to_csv(CSV_FILE, index=False)
+        return "Food logged successfully!"
+
+    # If GET request, show the form
+    return render_template('add_food.html')

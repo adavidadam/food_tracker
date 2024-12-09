@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Food</title>
+</head>
+<body>
+    <h1>Log Food Item</h1>
+    <form method="POST">
+        <label for="food">Food:</label>
+        <input type="text" name="food" placeholder="e.g., bread, milk" required><br>
+
+        <label for="portion">Portion:</label>
+        <input type="text" name="portion" placeholder="e.g., 2 slices, 1 cup"><br>
+
+        <label for="meal">Meal:</label>
+        <select name="meal">
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="snack">Snack</option>
+        </select><br>
+
+        <button type="submit">Add Food</button>
+    </form>
+</body>
+</html>
+<a href="/add_food">Log Food Item</a>
